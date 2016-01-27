@@ -12,43 +12,10 @@ function Promise(fn) {
         
     ];
 
-    var doneFns = [],
-        failFns = [];
+    var _doneFns = [],
+        _failFns = [];
 
-    var promise = {
-
-        status : 'pending',
-
-        preArgs : [],
-
-        done : function(fn){
-
-            if(promise.status == 'pending') doneFns.push(fn)
-
-            else if(promise.status == 'resolved') promise.preArgs = fn.apply(promise,promise.preArgs);
-
-            return promise;
-        },
-
-
-        fail : function(fn){
-
-            if(promise.status == 'pending') doneFns.push(fn)
-
-            else if(promise.status == 'rejected') promise.preArgs = fn.apply(promise,promise.preArgs);
-
-            failFns.push(fn)
-            return promise;
-        },
-
-        catch : function(fn){
-            // promise.then(,)
-            promise.fail(fn);
-        },
-
-
-
-    	reject : function(){
+    var _reject = function(){
 
             if(promise.status == 'rejected') return;
 
@@ -58,12 +25,11 @@ function Promise(fn) {
 
             promise.args = args;
 
-        	failFns.forEach(function(fn){
-        		fn.apply(promise,args);
-        	})
-    	},
-
-        resolve: function() {
+            _failFns.forEach(function(fn){
+                fn.apply(promise,args);
+            })
+        },
+        _resolve = function() {
 
             if(promise.status == 'resolved') return;
 
@@ -72,11 +38,44 @@ function Promise(fn) {
             var args = arguments;
 
             promise.args = args;
+           _doneFns.forEach(function(fn){
+                fn.apply(promise,args);
+            })
 
-        	doneFns.forEach(function(fn){
-        		fn.apply(promise,args);
-        	})
+        };
 
+
+    var promise = {
+
+        status : 'pending',
+
+        preArgs : [],
+
+        _reject : _reject,
+
+        _resolve : _resolve,
+
+        done : function(fn){
+
+            if(promise.status == 'pending')_doneFns.push(fn)
+
+            else if(promise.status == 'resolved') promise.preArgs = fn.apply(promise,promise.preArgs);
+
+            return promise;
+        },
+
+
+        fail : function(fn){
+
+            if(promise.status == 'pending')_failFns.push(fn)
+
+            else if(promise.status == 'rejected') promise.preArgs = fn.apply(promise,promise.preArgs);
+
+            return promise;
+        },
+
+        catch : function(fn){
+            promise.fail(fn);
         },
 
         then: function(doneFn, failFn) {
@@ -124,7 +123,7 @@ function Promise(fn) {
 
 
 
-    if(fn) fn.apply(promise,[promise.resolve,promise.reject]);
+    if(fn) fn.apply(promise,[_resolve,_reject]);
 
     // for(var i in promise) this[i] = promise[i];
 
@@ -139,15 +138,14 @@ Promise.race = function(fns){
 
         if (fns[i].isPromise) {//fn is promise
 
-            fns[i].done(retPromsie.resolve);
-            fns[i].fail(retPromsie.reject);
+            fns[i].done(retPromsie._resolve);
+            fns[i].fail(retPromsie._reject);
 
         }else{//return immediately
 
             return new Promise(function(resolve,reject){
 
                 var val = tools.isFunction(fns[i]) ? fns[i].call(this) : fns[i]
-                // this.isPromise = 'haha'
                 resolve( val ); 
 
             })
@@ -210,30 +208,31 @@ module.exports = Promise;
 //         console.log(val)
 //     });
 
-// var p2 = new Promise(function (resolve, reject) {
+var p2 = new Promise(function (resolve, reject) {
 
-//         console.log('start promise2');
+        console.log('start promise2');
 
-//         global.setTimeout(function () {
-//             resolve(4000)
-//         }, 4000);
-//     });
-// var p3 = new Promise(function (resolve, reject) {
+        global.setTimeout(function () {
+            resolve(1000)
+        }, 1000);
+    });
 
-//         console.log('start promise3');
+var p3 = new Promise(function (resolve, reject) {
 
-//         global.setTimeout(function () {
-//             resolve(3000)
-//         }, 3000);
-//     });
+        console.log('start promise3');
 
-// // console.log(Promise.prototype)
+        global.setTimeout(function () {
+            resolve(3000)
+        }, 3000);
+    });
+
+// console.log(Promise.prototype)
 // console.log(Promise.race([p2,p3,1]))
-// Promise.race([p2,p3,function(){return 2}]).then(function(val){
+Promise.race([p2,p3,function(){return 2}]).then(function(val){
 
-//     console.log(val)
+    console.log(val)
 
-// },function(val){
-//     console.log(val)
-// })
+},function(val){
+    console.log(val)
+})
 

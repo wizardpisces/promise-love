@@ -1,7 +1,7 @@
 {
-  "name": "promise-simple",
+  "name": "promise-love",
   "version": "0.0.1",
-  "description": "promise-simple",
+  "description": "promise-love",
   "main": "index.js",
   "scripts": {
     "test": "dev"
@@ -13,10 +13,10 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wizardpisces/promise-simple.git"
+    "url": "git+https://github.com/wizardpisces/promise-love.git"
   },
   "bugs": {
-    "url": "https://github.com/wizardpisces/promise-simple/issues"
+    "url": "https://github.com/wizardpisces/promise-love/issues"
   },
-  "homepage": "https://github.com/wizardpisces/promise-simple#readme"
+  "homepage": "https://github.com/wizardpisces/promise-love#readme"
 }
