@@ -1,0 +1,14 @@
+{
+  "name": "promise-simple",
+  "version": "0.0.1",
+  "description": "promise-simple",
+  "main": "index.js",
+  "scripts": {
+    "test": "dev"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "wizardpisces",
+  "license": "MIT"
+}
