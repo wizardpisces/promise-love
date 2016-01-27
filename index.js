@@ -159,6 +159,7 @@ Promise.race = function(fns){
     return retPromsie;
 }
 
+module.exports = Promise;
 //example
 // var p1 = new Promise(function (resolve, reject) {
 
