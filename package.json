@@ -10,5 +10,13 @@
     "none"
   ],
   "author": "wizardpisces",
-  "license": "MIT"
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wizardpisces/promise-simple.git"
+  },
+  "bugs": {
+    "url": "https://github.com/wizardpisces/promise-simple/issues"
+  },
+  "homepage": "https://github.com/wizardpisces/promise-simple#readme"
 }

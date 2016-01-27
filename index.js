@@ -210,30 +210,30 @@ module.exports = Promise;
 //         console.log(val)
 //     });
 
-var p2 = new Promise(function (resolve, reject) {
+// var p2 = new Promise(function (resolve, reject) {
 
-        console.log('start promise2');
+//         console.log('start promise2');
 
-        global.setTimeout(function () {
-            resolve(4000)
-        }, 4000);
-    });
-var p3 = new Promise(function (resolve, reject) {
+//         global.setTimeout(function () {
+//             resolve(4000)
+//         }, 4000);
+//     });
+// var p3 = new Promise(function (resolve, reject) {
 
-        console.log('start promise3');
+//         console.log('start promise3');
 
-        global.setTimeout(function () {
-            resolve(3000)
-        }, 3000);
-    });
+//         global.setTimeout(function () {
+//             resolve(3000)
+//         }, 3000);
+//     });
 
-// console.log(Promise.prototype)
-console.log(Promise.race([p2,p3,1]))
-Promise.race([p2,p3,function(){return 2}]).then(function(val){
+// // console.log(Promise.prototype)
+// console.log(Promise.race([p2,p3,1]))
+// Promise.race([p2,p3,function(){return 2}]).then(function(val){
 
-    console.log(val)
+//     console.log(val)
 
-},function(val){
-    console.log(val)
-})
+// },function(val){
+//     console.log(val)
+// })
 
