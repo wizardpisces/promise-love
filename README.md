@@ -14,30 +14,28 @@ npm install --save-dev promise-love
 
 refer to promise api
 
-#usage
+##usage
 
 refer to promise api
 
-#example
+##example
 
 ```
 // example
+
 var p1 = new Promise(function (resolve, reject) {
 
-        console.log('start promise');
+        console.log('start promise1');
 
-        // global.setTimeout(function () {
+        global.setTimeout(function () {
             resolve(1)
-        // }, 2000);
+        }, 2000);
     });
 
 
     p1.then(function (val) {
 
         console.log(val,'resolved 1');
-        return val;
-
-    }).then(function(val){
 
         var p2 = new Promise(function (resolve, reject) {
 
@@ -89,8 +87,6 @@ var p3 = new Promise(function (resolve, reject) {
         }, 3000);
     });
 
-// console.log(Promise.prototype)
-// console.log(Promise.race([p2,p3,1]))
 Promise.race([p2,p3,function(){return 2}]).then(function(val){
 
     console.log(val)
@@ -98,4 +94,13 @@ Promise.race([p2,p3,function(){return 2}]).then(function(val){
 },function(val){
     console.log(val)
 })
+
+Promise.all([p2,p3,function(){return 2}]).then(function(val){
+
+    console.log(val)
+
+},function(val){
+    console.log(val)
+})
+
 ```
