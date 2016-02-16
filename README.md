@@ -12,7 +12,12 @@ npm install --save-dev promise-love
 
 ## API
 
-refer to promise api
+then
+done
+fail
+catch
+all
+race
 
 ##usage
 

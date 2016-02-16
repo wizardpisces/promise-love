@@ -1,6 +1,6 @@
 {
   "name": "promise-love",
-  "version": "0.1.2",
+  "version": "0.2.3",
   "description": "promise-love",
   "main": "index.js",
   "scripts": {
